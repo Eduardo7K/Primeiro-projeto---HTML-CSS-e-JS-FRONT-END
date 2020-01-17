@@ -1,0 +1,16 @@
+#form{
+    width: 1000px;
+    border: 1px solid black;
+}
+#complete-name {
+    display: inline;
+}
+#pass-email {
+    display: inline;
+}
+
+#save-button {
+    color: white;
+    background-color: red;
+    border-radius: 1px;
+}

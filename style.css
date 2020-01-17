@@ -1,0 +1,87 @@
+body {
+                
+    background-image: linear-gradient(120deg, rgb(121, 53, 134), rgb(255, 2, 221));
+    font-family: sans-serif;
+    
+    }
+#box {
+    background-color: white;
+    margin-left: 40%;
+    margin-top: 8%;
+    width: 300px;
+    height: 500px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+}
+h2 {
+    text-align: center;
+}
+
+    #div-login {
+        width: 220px;
+        height: 10px;
+        background-color: lightgray;
+        margin-left: 25px;
+        padding: 15px;
+        padding-top: 5px;
+        padding-bottom: 30px;
+}
+#div-senha {
+    width: 220px;
+    height: 10px;
+    background-color: lightgray;
+    margin-left: 25px;
+    padding: 15px;
+    padding-top: 5px;
+    padding-bottom: 30px;
+}
+input {
+    background-color:lightgray;
+    border:none;
+    outline: 0;
+    }
+img {
+    padding-top: 7px;
+    padding-right: 3px;
+}
+button.button1 {
+    padding: 8px 88px;
+    margin-top:10px;
+    color: white;
+    background-color: rgb(255, 0, 149);
+    border-color: rgb(255, 0, 149);;
+    font-weight: 500;
+}   
+#che {
+    float:left;
+    margin-top:20px;
+    margin-left: 25px;
+}
+#rem {
+    float: left;
+    margin-top:20px;
+}
+#logw {
+    text-align: center;
+    margin-top: 30px;
+}
+#facebook-logo {
+    font-size: 12px;
+    float: left;
+    margin-left: 40px;
+    display: inline;
+}
+#google-logo {
+    font-size: 12px;
+    float: right;
+    margin-right: 40px;
+    display: inline;
+}
+#notm {
+    text-align: center;
+    margin-top:150px;
+}
+.fonte12{
+    font-size: 12px;;
+}

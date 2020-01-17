@@ -1,0 +1,101 @@
+#box-user-manag {
+    background-color: rgb(45, 145, 226);
+    color:white;
+    margin-left: 5px;
+    margin-top: 10px;
+    width: 1500px;
+    height: 75px;
+    padding-top: 20px;
+    border-radius: 5px;
+}
+
+h1 {
+  display: inline-block;
+  padding-top: 0px;
+  margin-top: 8px;
+}
+
+  .button {
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    padding-left: 10px;
+    padding-top: 10px;
+    }
+
+  #botao-add-user {
+    float: right;;
+    margin-right: 25px;
+    margin-left: 12px;
+    display: inline;
+    width: 125px;
+    height: 32px;
+    background-color: white;
+    border: none;
+    color: rgb(45, 145, 226);
+    padding-left: 0px;
+}
+
+  #botao-export {
+      float: right;
+      display: inline;
+      width: 130px;
+      height: 32px;
+      background-color: white;
+      border: none;
+      color:rgb(45, 145, 226);
+  }
+  .botton {
+      display: inline;
+      color: rgb(45, 145, 226);
+      
+  }
+  #showing-entries {
+    margin-left: 25px;
+    
+  }
+
+  #pagina {
+    margin-left: 1030px;
+    word-spacing: 13px;
+  }
+
+  tr {
+    border-top: 1px solid rgb(17, 194, 185);
+  }
+  td {
+    height: 75px;
+    width: 300px;
+  }
+  table, th, td {
+    text-align: left;;
+    border-collapse: collapse;
+    color:rgb(45, 145, 226);
+  }
+  table {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+  #tabela-dinamica {
+    margin-top: 25px;
+  }
+  #span-azul {
+    background-color: rgb(45, 145, 226);
+    color: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  #user-manag {
+    margin-left: 20px;
+  }
+
+  #tabela-dinamica img {
+    height: 35px;
+    width: 35px;
+    border-radius:50%;
+  }
