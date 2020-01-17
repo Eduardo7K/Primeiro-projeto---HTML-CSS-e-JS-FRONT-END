@@ -88,112 +88,77 @@ var table = document.createElement('table'),
     td;
 
 th = document.createElement('th');
-    th.innerHTML = "#";
-table.appendChild(th);
-table.appendChild(thead);
-//table.appendChild(tbody);
+th.innerHTML = "#";
 tr.appendChild(th); // teste
-//tbody.appendChild(tr); // teste
-thead.appendChild(tr);
 
 th = document.createElement('th');
 th.innerHTML = "Name"
-table.appendChild(th);
-table.appendChild(thead);
-//table.appendChild(tbody);
 tr.appendChild(th); // teste
-//tbody.appendChild(tr); // teste
-thead.appendChild(tr);
 
 th = document.createElement('th');
 th.innerHTML = "Date created"
-table.appendChild(th);
-table.appendChild(thead);
-//table.appendChild(tbody);
 tr.appendChild(th); // teste
-//tbody.appendChild(tr); // teste
-thead.appendChild(tr);
 
 th = document.createElement('th');
 th.innerHTML = "Role"
-table.appendChild(th);
-table.appendChild(thead);
-//table.appendChild(tbody);
 tr.appendChild(th); // teste
-//tbody.appendChild(tr); // teste
-thead.appendChild(tr);
 
 th = document.createElement('th');
 th.innerHTML = "Status"
-table.appendChild(th);
-table.appendChild(thead);
-//table.appendChild(tbody);
 tr.appendChild(th); // teste
-//tbody.appendChild(tr); // teste
-thead.appendChild(tr);
 
 th = document.createElement('th');
 th.innerHTML = "Action"
-table.appendChild(th);
-//table.appendChild(thead);
-table.appendChild(tbody);
+th.colSpan = 2
 tr.appendChild(th); // teste
-//tbody.appendChild(tr); // teste
-thead.appendChild(tr);
 
+thead.appendChild(tr);
+table.appendChild(thead);
+table.appendChild(tbody);
 
 document.getElementById("tabela-dinamica").appendChild(table);
 
 
 
 for (var i = 0; i < table1.length; i++) {
-    console.log(table1[i])
-    console.log(table1[i].nome)
-    tr = document.createElement('tr'),
+    tr = document.createElement('tr')
 
-        //for #
-        td = document.createElement('td');
+    //for #
+    td = document.createElement('td');
     td.innerHTML = table1[i].id;
     tr.appendChild(td);
-    tbody.appendChild(tr);
 
     //for name
     td = document.createElement('td');
     td.innerHTML = table1[i].nome;
     tr.appendChild(td);
-    tbody.appendChild(tr);
 
     //for img
     tr.appendChild(document.createElement('td'))
         .appendChild(document.createElement('img'))
         .src = table1[i].img;
     tr.appendChild(td);
-    tbody.appendChild(tr);
-        
+
 
     //for date creation
     td = document.createElement('td');
     td.innerHTML = table1[i].data;
     tr.appendChild(td);
-    tbody.appendChild(tr);
 
     //for role
     td = document.createElement('td');
     td.innerHTML = table1[i].role;
     tr.appendChild(td);
-    tbody.appendChild(tr);
 
     //for status
     td = document.createElement('td');
     td.innerHTML = table1[i].status;
     tr.appendChild(td);
-    tbody.appendChild(tr);
 
     //for action
     td = document.createElement('td');
     td.innerHTML = table1[i].action;
     tr.appendChild(td);
+
     tbody.appendChild(tr);
-
-
 }
