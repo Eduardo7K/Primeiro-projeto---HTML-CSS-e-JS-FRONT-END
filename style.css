@@ -16,6 +16,10 @@ body {
 }
 h2 {
     text-align: center;
+    margin-top: 55px;
+    margin-bottom: 30px;
+    font-family: font-family: Times, "Times New Roman", serif;
+    font-size: 20px;
 }
 
     #div-login {
@@ -43,11 +47,11 @@ input {
     }
 img {
     padding-top: 7px;
-    padding-right: 3px;
+    padding-right: 6px;
 }
 button.button1 {
     padding: 8px 88px;
-    margin-top:10px;
+    margin-top: 25px;
     color: white;
     background-color: rgb(255, 0, 149);
     border-color: rgb(255, 0, 149);;
@@ -55,16 +59,16 @@ button.button1 {
 }   
 #che {
     float:left;
-    margin-top:20px;
+    margin-top: 10px;
     margin-left: 25px;
 }
 #rem {
     float: left;
-    margin-top:20px;
+    margin-top: 10px;
 }
 #logw {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 #facebook-logo {
     font-size: 12px;
@@ -80,7 +84,7 @@ button.button1 {
 }
 #notm {
     text-align: center;
-    margin-top:150px;
+    margin-top: 110px;
 }
 .fonte12{
     font-size: 12px;;

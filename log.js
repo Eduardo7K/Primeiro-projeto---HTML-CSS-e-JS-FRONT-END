@@ -14,6 +14,15 @@ function botaoLogin() {
 
 }
 
+function newUser() {
+    window.location.href = "form.html"
+}
+
+function deleteUser(i) {
+    alert("teste");
+    table1.splice(i, 1);
+}
+
 var table1 = [
     {
         "id": 1,
@@ -21,7 +30,7 @@ var table1 = [
         "data": "04/10/2013",
         "role": "Admin",
         "status": "Active",
-        "action": "",
+        "statusImg": "imgs\\green-circle.png",
         "img": "imgs\\michael.jpg"
     },
     {
@@ -30,7 +39,7 @@ var table1 = [
         "data": "05/08/2014",
         "role": "Publisher",
         "status": "Active",
-        "action": "",
+        "statusImg": "imgs\\green-circle.png",
         "img": "imgs\\paula.jpg"
     },
     {
@@ -39,7 +48,7 @@ var table1 = [
         "data": "11/05/2015",
         "role": "Publisher",
         "status": "Suspended",
-        "action": "",
+        "statusImg": "imgs\\red-circle.png",
         "img": "imgs\\antonio.png"
     },
     {
@@ -48,7 +57,7 @@ var table1 = [
         "data": "06/09/2016",
         "role": "Reviewer",
         "status": "Active",
-        "action": "",
+        "statusImg": "imgs\\green-circle.png",
         "img": "imgs\\mary.jpg"
     },
     {
@@ -57,28 +66,11 @@ var table1 = [
         "data": "12/08/2017",
         "role": "Moderator",
         "status": "Inactive",
-        "action": "",
+        "statusImg": "imgs\\yellow-circle.png",
         "img": "imgs\\martin.jpg"
     }
 ]
 
-/*
-var p = document.createElement('p');
-var iimg = document.createElement('img');
-var div = document.createElement('div');
-div.appendChild(iimg)
-p.appendChild(div);
-iimg.src = 'imgs/mary.jpg'
-// console.log(p)
-// p.innerHTML = 'TESTE'
-var img2 = document.createElement('img');
-p.appendChild(img2);
-img2.src = "table1.img[4]";
-
-
-// console.log(iimg)
-document.getElementById("tabela-dinamica").appendChild(p)
-*/
 
 var table = document.createElement('table'),
     thead = document.createElement('thead'),
@@ -89,28 +81,27 @@ var table = document.createElement('table'),
 
 th = document.createElement('th');
 th.innerHTML = "#";
-tr.appendChild(th); // teste
+tr.appendChild(th);
 
 th = document.createElement('th');
 th.innerHTML = "Name"
-tr.appendChild(th); // teste
+tr.appendChild(th);
 
 th = document.createElement('th');
 th.innerHTML = "Date created"
-tr.appendChild(th); // teste
+tr.appendChild(th);
 
 th = document.createElement('th');
 th.innerHTML = "Role"
-tr.appendChild(th); // teste
+tr.appendChild(th);
 
 th = document.createElement('th');
 th.innerHTML = "Status"
-tr.appendChild(th); // teste
+tr.appendChild(th);
 
 th = document.createElement('th');
 th.innerHTML = "Action"
-th.colSpan = 2
-tr.appendChild(th); // teste
+tr.appendChild(th);
 
 thead.appendChild(tr);
 table.appendChild(thead);
@@ -121,7 +112,7 @@ document.getElementById("tabela-dinamica").appendChild(table);
 
 
 for (var i = 0; i < table1.length; i++) {
-    tr = document.createElement('tr')
+    tr = document.createElement('tr');
 
     //for #
     td = document.createElement('td');
@@ -129,15 +120,17 @@ for (var i = 0; i < table1.length; i++) {
     tr.appendChild(td);
 
     //for name
+    var divImg = document.createElement('div');
     td = document.createElement('td');
     td.innerHTML = table1[i].nome;
-    tr.appendChild(td);
+    divImg.appendChild(td);
+    divImg.id = "div-name";
 
     //for img
-    tr.appendChild(document.createElement('td'))
+    td
         .appendChild(document.createElement('img'))
         .src = table1[i].img;
-    tr.appendChild(td);
+    tr.appendChild(divImg);
 
 
     //for date creation
@@ -155,10 +148,36 @@ for (var i = 0; i < table1.length; i++) {
     td.innerHTML = table1[i].status;
     tr.appendChild(td);
 
+    //for status img
+    td
+        .appendChild(document.createElement('img'))
+        .src = table1[i].statusImg;
+    td.id = "td-statusImg";
+    tr.appendChild(td);
+
     //for action
     td = document.createElement('td');
-    td.innerHTML = table1[i].action;
+    td.id = "td-action";
+
+    //for gear image
+    var gear1 = document.createElement('img');
+    gear1.src = "imgs\\engine.png";
+    td.appendChild(gear1);
+
+    //for delete image
+    var delImg = document.createElement('img');
+    delImg.src = "imgs\\x.png";
+    var tagA = document.createElement('a');
+
+    tagA.id = "a-tag";
+    tagA.addEventListener("click", function(){deleteUser("i")}, false); 
+   
+
+
+    tagA.appendChild(delImg);
+    td.appendChild(tagA);
     tr.appendChild(td);
 
     tbody.appendChild(tr);
 }
+

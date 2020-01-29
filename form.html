@@ -15,14 +15,14 @@
 
         <div><span>Name</span> <span>Last name</span> </div>
         <div id="complete-name">
-            <input type="text" id='' name="" size="25" placeholder="ex. Marina">
-            <input type="text" id='' name="" size="25" placeholder="ex. Lewis"> </div>
+            <input type="text" class="inputs" size="39" placeholder="ex. Marina">
+            <input type="text" class="inputs"  name="" size="39" placeholder="ex. Lewis"> </div>
 
 
         <div><span>Pasport</span> <span>Email</span></div>
         <div id="pass-email">
-            <input type="text" id='' name="" size="25" placeholder="ex. A9230429923">
-            <input type="text" id='' name="" size="25" placeholder="ex. example@example.com"></div>
+            <input type="text" class="inputs"  name="" size="39" placeholder="ex. A9230429923">
+            <input type="text" class="inputs"  name="" size="39" placeholder="ex. example@example.com"></div>
         <br>
 
         <div>Birthday</div>
@@ -60,22 +60,22 @@
                 <option value="31">31</option>
             </select>
 
-            <select>
-                <option value="01">Janeiro</option>
-                <option value="02">Fevereiro</option>
-                <option value="03">Março</option>
-                <option value="04">Abril</option>
-                <option value="05">Maio</option>
-                <option value="06">Junho</option>
-                <option value="07">Julho</option>
-                <option value="08">Agosto</option>
-                <option value="09">Setembro</option>
-                <option value="10">Outubro</option>
-                <option value="11">Novembro</option>
-                <option value="12">Dezembro</option>
+            <select id="month">
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
             </select>
 
-            <select>
+            <select id="year">
                 <option value="2020">2020</option>
                 <option value="2019">2019</option>
                 <option value="2018">2018</option>
@@ -170,34 +170,38 @@
             </select>
         </div>
         Language
-        <div><input type="text" id='' name="" size="25" placeholder="English"></div>
+        <div><input class="inputs" type="text"  name="" size="86" placeholder="English"></div>
 
         <div><span>Country of residence</span> <span>Nationality</span> </div>
-        <div><input type="text" id='' name="" size="25" placeholder="ex. Spain">
-        <input type="text" id='' name="" size="25" placeholder="ex. Spanish">
-       </div>
-
-        Adress
-        <div><input type="text" id='' name="" size="25" placeholder="ex. Avenida Diagonal, 6"> </div>
-       
-        <div>Mobile phone Company email</div>
-        <div><input type="text" id='' name="" size="25" placeholder="ex. 639842879">
-        <input type="text" id='' name="" size="25" placeholder="ex. admin@marsbased.com">
+        <div><input type="text" class="inputs"  name="" size="39" placeholder="ex. Spain">
+            <input type="text" class="inputs"  name="" size="39" placeholder="ex. Spanish">
         </div>
 
-        <button type="button" name="" value="" class="" id="">Upload picture</button>
-        <img src="imgs\person.png" alt="person image">
-        <div>JPEG, PNG, GIF or BMP - 5MB file limit, at least 250x250 pixels.</div>
+        Adress
+        <div><input type="text" class="inputs"  name="" size="86" placeholder="ex. Avenida Diagonal, 6"> </div>
 
-        <button type="button" name="" value="" class="" id="">Delete picture</button>
+        <div>Mobile phone Company email</div>
+        <div><input type="text" class="inputs"  name="" size="39" placeholder="ex. 639842879">
+            <input type="text" class="inputs"  name="" size="39" placeholder="ex. admin@marsbased.com">
+        </div>
 
-        <span id="save-button"><button type="button" name="" value="" id="">Save changes</button></span>
+        <div>
+        <div>
+        <button type="button" name="" value="" class="" id="update-button">Upload picture</button>
+        <button type="button" name="" value="" class="" id="delete-button">Delete picture</button>
+        </div>
+        <img src="imgs\person.png" alt="person image" id="person-image">
+        <div id="box-info">JPEG, PNG, GIF or BMP - 5MB file limit, at least 250x250 pixels.</div>
+
+        
+        </div>
+        <button type="button" name="" value="" id="save-button"">Save changes</button>
 
 
     </div>
 
 
-    <script type="text/javascript" src="log.js"></script>
+    <script type=" text/javascript" src="log.js"></script>
 </body>
 
 </html>

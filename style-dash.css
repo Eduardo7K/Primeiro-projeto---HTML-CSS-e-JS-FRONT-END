@@ -22,8 +22,9 @@ h1 {
     text-decoration: none;
     display: inline-block;
     cursor: pointer;
-    padding-left: 10px;
+    padding-left: 5px;
     padding-top: 10px;
+    padding-right: 5px;
     }
 
   #botao-add-user {
@@ -63,9 +64,10 @@ h1 {
     word-spacing: 13px;
   }
 
-  tr {
+  tbody tr {
     border-top: 1px solid rgb(17, 194, 185);
   }
+  
   td {
     height: 75px;
     width: 300px;
@@ -99,3 +101,35 @@ h1 {
     width: 35px;
     border-radius:50%;
   }
+
+  table tbody tr div {
+    width: 240px;
+
+  }
+
+#div-name img {
+  float: left;
+  margin-right: 10px;
+}
+
+#div-name {
+  display: table-cell;
+  vertical-align: inherit;
+}
+
+#td-action img {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+
+#td-statusImg img {
+  height: 10px;
+  width: 10px;
+  margin-right: 10px;
+  float:left;
+}
+
+#a-tag {
+  cursor: pointer;
+}
