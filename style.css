@@ -2,6 +2,7 @@ body {
                 
     background-image: linear-gradient(120deg, rgb(121, 53, 134), rgb(255, 2, 221));
     font-family: sans-serif;
+    font-weight: normal;
     
     }
 #box {
@@ -31,6 +32,9 @@ h2 {
         padding-top: 5px;
         padding-bottom: 30px;
 }
+#div-login input {
+    margin-left: 4px;
+}
 #div-senha {
     width: 220px;
     height: 10px;
@@ -44,6 +48,7 @@ input {
     background-color:lightgray;
     border:none;
     outline: 0;
+    vertical-align: 4px;
     }
 img {
     padding-top: 7px;
@@ -55,8 +60,15 @@ button.button1 {
     color: white;
     background-color: rgb(255, 0, 149);
     border-color: rgb(255, 0, 149);;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: bold;
 }   
+#google-logo span {
+    vertical-align: 6px;
+}
+#facebook-logo img {
+    width: 13px;
+}
 #che {
     float:left;
     margin-top: 10px;
@@ -69,6 +81,7 @@ button.button1 {
 #logw {
     text-align: center;
     margin-top: 15px;
+    margin-bottom: 15px;
 }
 #facebook-logo {
     font-size: 12px;

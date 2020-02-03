@@ -13,13 +13,13 @@
         <h1>About you</h1>
         <p>Tell us who you are! You can modify your personal information here.</p>
 
-        <div><span>Name</span> <span>Last name</span> </div>
+        <div><span>Name</span> <span id="lastN-span">Last name</span> </div>
         <div id="complete-name">
-            <input type="text" class="inputs" size="39" placeholder="ex. Marina">
-            <input type="text" class="inputs"  name="" size="39" placeholder="ex. Lewis"> </div>
+            <input type="text" class="inputs" size="39" placeholder="ex. Marina" id="firstName">
+            <input type="text" class="inputs"  name="" size="39" placeholder="ex. Lewis" id="lastName"> </div>
 
 
-        <div><span>Pasport</span> <span>Email</span></div>
+        <div><span>Pasport</span> <span id="email-span">Email</span></div>
         <div id="pass-email">
             <input type="text" class="inputs"  name="" size="39" placeholder="ex. A9230429923">
             <input type="text" class="inputs"  name="" size="39" placeholder="ex. example@example.com"></div>
@@ -172,7 +172,7 @@
         Language
         <div><input class="inputs" type="text"  name="" size="86" placeholder="English"></div>
 
-        <div><span>Country of residence</span> <span>Nationality</span> </div>
+        <div><span>Country of residence</span> <span id="nationality-span">Nationality</span> </div>
         <div><input type="text" class="inputs"  name="" size="39" placeholder="ex. Spain">
             <input type="text" class="inputs"  name="" size="39" placeholder="ex. Spanish">
         </div>
@@ -180,24 +180,26 @@
         Adress
         <div><input type="text" class="inputs"  name="" size="86" placeholder="ex. Avenida Diagonal, 6"> </div>
 
-        <div>Mobile phone Company email</div>
+        <div>Mobile phone <span id="company-span">Company email</span></div>
         <div><input type="text" class="inputs"  name="" size="39" placeholder="ex. 639842879">
             <input type="text" class="inputs"  name="" size="39" placeholder="ex. admin@marsbased.com">
         </div>
 
-        <div>
-        <div>
-        <button type="button" name="" value="" class="" id="update-button">Upload picture</button>
-        <button type="button" name="" value="" class="" id="delete-button">Delete picture</button>
+        <div id="botton-buttons">
+        <div id="upDelButtons">
+        <label for='upload-file'>Upload picture</label>
+        <input onclick="readFile()" id='upload-file' type='file'>
+
+        <button onclick="deleteImage()" type="button" name="" value="" class="" id="delete-button">Delete picture</button>
         </div>
         <img src="imgs\person.png" alt="person image" id="person-image">
         <div id="box-info">JPEG, PNG, GIF or BMP - 5MB file limit, at least 250x250 pixels.</div>
 
         
         </div>
-        <button type="button" name="" value="" id="save-button"">Save changes</button>
+        <button onclick="addNewItem()" type="submit" name="" value="" id="save-button" href="javascript:addNewItem();">Save changes</button>
 
-
+    
     </div>
 
 

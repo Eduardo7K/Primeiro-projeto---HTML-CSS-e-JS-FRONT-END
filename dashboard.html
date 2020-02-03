@@ -7,15 +7,15 @@
     <link rel="stylesheet" type="text/css" href="style-dash.css">
 </head>
 
-<body>
+<body onload="checkLocalStorage()">
     <div id="box-user-manag">
         <span id="user-manag">
             <h1>User <strong>management</strong></h1>
 
         </span>
         <span>
-            <a href="javascript:newUser();" class="button" id="botao-add-user"><img src="imgs\add.png" alt="add user image">Add new user</a>
-            <a href="" class="button" id="botao-export"><img src="imgs\export.png" alt="export image">Export to Excel</a>
+            <a href="javascript:newUser();" class="button" id="botao-add-user"><img src="imgs\add.png" alt="add user image"><span class="txtButton">Add new user</span></a>
+            <a href="" class="button" id="botao-export"><img src="imgs\export.png" alt="export image"><span class="txtButton">Export to Excel</span></a>
         </span>
     </div>
     </div>
