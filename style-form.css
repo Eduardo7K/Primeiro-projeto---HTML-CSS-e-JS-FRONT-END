@@ -99,6 +99,24 @@ input[type='file'] {
 
 }
 
+#popup {
+    float: left;
+    border: 1px solid rgb(101, 230, 101);
+    width: 300px;
+    height: 32px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    padding-bottom: 14px;
+    padding-left: 10px;
+    padding-top: 8px;
+    padding-right: 0px;
+    font-size: 15px;
+    color: rgb(101, 230, 101);
+    height: 28px;
+    margin-right: 500px;  
+
+}
+
 .inputs {
     line-height: 25px;
     margin-top: 5px;
@@ -129,11 +147,13 @@ input {
 }
 select {
     margin-right: 10px;
+
 }
 #person-image {
     margin-left: 50px;
     width: 94px;
     height: 94px;
+    border-radius:50%;
 }
 
 p, div {
@@ -168,7 +188,7 @@ input, select {
 }
 
 #lastN-span {
-    margin-left: 284px;
+    margin-left: 272px;
 }
 
 #nationality-span {
@@ -179,4 +199,21 @@ input, select {
     margin-left: 233px;
 }
 
+#question-image {
+    vertical-align: super;
+}
+#question-div {
+    margin-top: 65px;
+}
+p {
+    margin-bottom: 6px;
+}
+
+
+select {
+
+    border: 1px solid rgb(212, 219, 200);
+    height: 28px;
+    border-radius: 4px;
+}
 

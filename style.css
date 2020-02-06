@@ -17,10 +17,11 @@ body {
 }
 h2 {
     text-align: center;
-    margin-top: 55px;
+    margin-top: 50px;
     margin-bottom: 30px;
     font-family: font-family: Times, "Times New Roman", serif;
     font-size: 20px;
+    font-weight: 800;
 }
 
     #div-login {
@@ -34,6 +35,9 @@ h2 {
 }
 #div-login input {
     margin-left: 4px;
+}
+#rem, #logw, #notm {
+    color: rgb(77, 77, 82);
 }
 #div-senha {
     width: 220px;
@@ -55,7 +59,7 @@ img {
     padding-right: 6px;
 }
 button.button1 {
-    padding: 8px 88px;
+    padding: 10px 88px;
     margin-top: 25px;
     color: white;
     background-color: rgb(255, 0, 149);
@@ -97,7 +101,7 @@ button.button1 {
 }
 #notm {
     text-align: center;
-    margin-top: 110px;
+    margin-top: 115px;
 }
 .fonte12{
     font-size: 12px;;

@@ -28,6 +28,7 @@ h1 {
   display: inline-block;
   padding-top: 4px;
   margin-top: 8px;
+  font-weight: 600;
 }
 
 thead {
@@ -64,7 +65,7 @@ tr th {
     margin-right: 25px;
     margin-left: 12px;
     display: inline;
-    width: 125px;
+    width: 150px;
     height: 32px;
     background-color: white;
     border: none;
@@ -75,7 +76,7 @@ tr th {
   #botao-export {
       float: right;
       display: inline;
-      width: 130px;
+      width: 150px;
       height: 32px;
       background-color: white;
       border: none;
@@ -102,7 +103,6 @@ tr th {
   
   td {
     height: 75px;
-    width: 300px;
   }
   table, th, td {
     text-align: left;;
@@ -124,8 +124,12 @@ tr th {
     padding-right: 10px;
     padding-left: 10px;
   }
+  #span-user {
+    font-weight: normal;
+  }
   #user-manag {
     margin-left: 20px;
+    font-size: initial;
   }
 
   #tabela-dinamica img {
@@ -165,4 +169,23 @@ tr th {
 
 #a-tag {
   cursor: pointer;
+}
+
+.idClass {
+  width: 90px;
+}
+.nameClass {
+  width: 350px;
+}
+.dataClass {
+  width: 300px;
+}
+.roleClass {
+  width: 300px;
+}
+.statusClass {
+  width: 300px;
+}
+.actionClass {
+  width: 80px;
 }

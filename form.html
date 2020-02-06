@@ -8,25 +8,27 @@
 </head>
 
 <body>
-    <div id="form">
+    <form id="form">
 
         <h1>About you</h1>
         <p>Tell us who you are! You can modify your personal information here.</p>
 
-        <div><span>Name</span> <span id="lastN-span">Last name</span> </div>
+        <div style="display: none" id="popup">Some information about something really long. Helping users to know what this is.</div>
+        
+        <div id="question-div"><span>Name</span> <img src="imgs\question.png" alt="question image" id="question-image" onmouseover="descBox()"> <span id="lastN-span">Last name</span> </div>
         <div id="complete-name">
-            <input type="text" class="inputs" size="39" placeholder="ex. Marina" id="firstName">
-            <input type="text" class="inputs"  name="" size="39" placeholder="ex. Lewis" id="lastName"> </div>
-
+            <input type="text" class="inputs" size="39" placeholder="ex. Marina" id="firstName" required>
+            <input type="text" class="inputs"  name="" size="39" placeholder="ex. Lewis" id="lastName" required> </div>
+            
 
         <div><span>Pasport</span> <span id="email-span">Email</span></div>
         <div id="pass-email">
             <input type="text" class="inputs"  name="" size="39" placeholder="ex. A9230429923">
-            <input type="text" class="inputs"  name="" size="39" placeholder="ex. example@example.com"></div>
+            <input type="email" class="inputs"  name="" size="39" placeholder="ex. example@example.com" required></div>
         <br>
 
         <div>Birthday</div>
-        <div><select id=birthday>
+        <div><select id=birthday required>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -60,7 +62,7 @@
                 <option value="31">31</option>
             </select>
 
-            <select id="month">
+            <select id="month" required>
                 <option value="01">January</option>
                 <option value="02">February</option>
                 <option value="03">March</option>
@@ -75,7 +77,7 @@
                 <option value="12">December</option>
             </select>
 
-            <select id="year">
+            <select id="year" required>
                 <option value="2020">2020</option>
                 <option value="2019">2019</option>
                 <option value="2018">2018</option>
@@ -170,7 +172,7 @@
             </select>
         </div>
         Language
-        <div><input class="inputs" type="text"  name="" size="86" placeholder="English"></div>
+        <div><input class="inputs" type="text"  name="" size="86" placeholder="English" required></div>
 
         <div><span>Country of residence</span> <span id="nationality-span">Nationality</span> </div>
         <div><input type="text" class="inputs"  name="" size="39" placeholder="ex. Spain">
@@ -178,11 +180,11 @@
         </div>
 
         Adress
-        <div><input type="text" class="inputs"  name="" size="86" placeholder="ex. Avenida Diagonal, 6"> </div>
+        <div><input type="text" class="inputs"  name="" size="86" placeholder="Avenida Diagonal, 6"> </div>
 
         <div>Mobile phone <span id="company-span">Company email</span></div>
-        <div><input type="text" class="inputs"  name="" size="39" placeholder="ex. 639842879">
-            <input type="text" class="inputs"  name="" size="39" placeholder="ex. admin@marsbased.com">
+        <div><input type="text" class="inputs"  name="" size="39" placeholder="ex. 639842879" required>
+            <input type="email" class="inputs"  name="" size="39" placeholder="admin@marsbased.com">
         </div>
 
         <div id="botton-buttons">
@@ -197,10 +199,10 @@
 
         
         </div>
-        <button onclick="addNewItem()" type="submit" name="" value="" id="save-button" href="javascript:addNewItem();">Save changes</button>
+        <button onclick="addNewItem()" type="submit" name="" value="" id="save-button">Save changes</button>
 
     
-    </div>
+    </form>
 
 
     <script type=" text/javascript" src="log.js"></script>
