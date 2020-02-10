@@ -1,219 +1,224 @@
 #form {
-    color: rgb(102, 6, 102);
-    width: 690px;
-    border: 1px solid rgb(212, 219, 200);
-    margin-left: 400px;
-    margin-right: 100px;
-    margin-top: 30px;
-    padding-left: 30px;
-    margin-bottom: 30px;
+  color: rgb(102, 6, 102);
+  width: 690px;
+  border: 1px solid rgb(212, 219, 200);
+  margin-left: 400px;
+  margin-right: 100px;
+  margin-top: 30px;
+  padding-left: 30px;
+  margin-bottom: 30px;
 }
 #complete-name {
-    display: inline;
-
+  display: inline;
+}
+h1 {
+  font-family: sans-serif;
 }
 #pass-email {
-    display: inline;
+  display: inline;
 }
 
 #save-button {
-    color: white;
-    background-color: red;
-    border-radius: 2px;
-    border: 1px black;
-    width: 130px;
-    height: 32px;
-    font-size: 12px;
-    margin-left: 260px;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    cursor: pointer;
+  color: white;
+  background-color: red;
+  border-radius: 2px;
+  border: 1px black;
+  width: 130px;
+  height: 32px;
+  font-size: 12px;
+  margin-left: 260px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  cursor: pointer;
 }
 
 #delete-button {
-    background-color: rgb(233, 219, 219);
-    border-radius: 2px;
-    border: 1px black;
-    width: 130px;
-    height: 32px;
-    font-size: 12px;
-    float: left;
-    margin-left: 100px;
-    cursor: pointer;
+  background-color: rgb(233, 219, 219);
+  border-radius: 2px;
+  border: 1px black;
+  width: 130px;
+  height: 32px;
+  font-size: 12px;
+  float: left;
+  margin-left: 100px;
+  cursor: pointer;
 }
 
 #upload-button {
-    color: white;
-    background-color: rgb(95, 86, 86);
-    border-radius: 2px;
-    border: 1px black;
-    width: 130px;
-    height: 32px;
-    font-size: 12px;
-    float: left;
-    margin-left: 100px;
-    margin-bottom: 20px;
-    cursor: pointer;
+  color: white;
+  background-color: rgb(95, 86, 86);
+  border-radius: 2px;
+  border: 1px black;
+  width: 130px;
+  height: 32px;
+  font-size: 12px;
+  float: left;
+  margin-left: 100px;
+  margin-bottom: 20px;
+  cursor: pointer;
 }
 
+input[type="file"] {
+  display: none;
+}
 
-input[type='file'] {
-    display: none
-  }
-  
-  
-  label {
-    color: white;
-    background-color: rgb(95, 86, 86);
-    border-radius: 2px;
-    border: 1px black;
-    width: 130px;
-    height: 24px;
-    font-size: 12px;
-    float: left;
-    margin-left: 100px;
-    margin-bottom: 20px;
-    cursor: pointer;
-    text-align: center;
-    padding-top: 8px;
-  }
-
-
-
+label {
+  color: white;
+  background-color: rgb(95, 86, 86);
+  border-radius: 2px;
+  border: 1px black;
+  width: 130px;
+  height: 24px;
+  font-size: 12px;
+  float: left;
+  margin-left: 100px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  text-align: center;
+  padding-top: 8px;
+}
 
 #box-info {
-    float: right;
-    border: 1px solid rgb(101, 230, 101);
-    width: 228px;
-    height: 32px;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-right: 0px;
-    font-size: 13px;
-    margin-right: 30px;
-    color: rgb(101, 230, 101);
-    margin-left: 30px;
-
+  float: right;
+  border: 1px solid rgb(101, 230, 101);
+  width: 228px;
+  height: 32px;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 0px;
+  font-size: 13px;
+  margin-right: 30px;
+  color: rgb(101, 230, 101);
+  margin-left: 30px;
 }
 
 #popup {
-    float: left;
-    border: 1px solid rgb(101, 230, 101);
-    width: 300px;
-    height: 32px;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    padding-bottom: 14px;
-    padding-left: 10px;
-    padding-top: 8px;
-    padding-right: 0px;
-    font-size: 15px;
-    color: rgb(101, 230, 101);
-    height: 28px;
-    margin-right: 500px;  
-
+  float: left;
+  border: 1px solid rgb(101, 230, 101);
+  width: 300px;
+  height: 32px;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  padding-bottom: 14px;
+  padding-left: 10px;
+  padding-top: 8px;
+  padding-right: 0px;
+  font-size: 15px;
+  color: rgb(101, 230, 101);
+  height: 28px;
+  margin-right: 500px;
 }
 
 .inputs {
-    line-height: 25px;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    width: 300px;
+  line-height: 25px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 300px;
+}
+.bigInputs {
+  line-height: 25px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 631px;
 }
 #birthday {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 100px;
-    margin-bottom: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 100px;
+  margin-bottom: 20px;
 }
 #month {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 140px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 140px;
+  width: 294px;
 }
 #year {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 80px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 80px;
 }
 input {
-    margin-right: 15px;
+  margin-right: 15px;
 }
 select {
-    margin-right: 10px;
-
+  margin-right: 10px;
 }
 #person-image {
-    margin-left: 50px;
-    width: 94px;
-    height: 94px;
-    border-radius:50%;
+  margin-left: 50px;
+  width: 94px;
+  height: 94px;
+  border-radius: 50%;
 }
 
-p, div {
-    font-family: sans-serif;
+p,
+div {
+  font-family: sans-serif;
 }
 
-input, select {
-    border-radius: 4px;
-    border: 1px solid rgb(212, 219, 200);
-    padding-left: 10px;
+input,
+select {
+  border-radius: 4px;
+  border: 1px solid rgb(212, 219, 200);
+  padding-left: 10px;
 }
 
 #botton-buttons {
-    display: inline-flex
+  display: inline-flex;
 }
 
 #upDelButtons {
-    display: grid;
+  display: grid;
 }
 
-#birthday, #year {
-    width: 160px;
-}
-
-#month {
-    width: 295px;
-
+#birthday,
+#year {
+  width: 160px;
 }
 
 #email-span {
-    margin-left: 272px;
+  margin-left: 272px;
 }
 
 #lastN-span {
-    margin-left: 272px;
+  margin-left: 272px;
 }
 
 #nationality-span {
-    margin-left: 181px;
+  margin-left: 181px;
 }
 
 #company-span {
-    margin-left: 233px;
+  margin-left: 233px;
 }
 
 #question-image {
-    vertical-align: super;
+  vertical-align: super;
 }
 #question-div {
-    margin-top: 65px;
+  margin-top: 65px;
 }
 p {
-    margin-bottom: 6px;
+  margin-bottom: 6px;
 }
-
 
 select {
-
-    border: 1px solid rgb(212, 219, 200);
-    height: 28px;
-    border-radius: 4px;
+  border: 1px solid rgb(212, 219, 200);
+  height: 28px;
+  border-radius: 4px;
 }
 
+.asterisk_input::after {
+  content: " *";
+  color: rgb(126, 133, 115);
+  position: absolute;
+  margin: 11px 0px 0px -35px;
+  font-size: x-large;
+  padding: 0 5px 0 0;
+}

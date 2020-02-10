@@ -135,7 +135,10 @@ table.appendChild(thead);
 table.appendChild(tbody);
 
 table.id = "formId";
-document.getElementById("tabela-dinamica").appendChild(table);
+
+function appendtable() {
+  document.getElementById("tabela-dinamica").appendChild(table);
+}
 
 function updateTable(table1) {
   for (var i = 0; i < table1.length; i++) {
@@ -248,32 +251,40 @@ function localStoreItems() {
 }
 
 function addNewItem() {
-  checkLocalStorage();
+  if (checkLength() == true) {
+    checkLocalStorage();
 
-  let id = JSON.parse(localStorage.getItem("counter"));
-  idIncrement();
-  let firstName = document.getElementById("firstName").value;
-  let lastName = document.getElementById("lastName").value;
-  let personName = firstName + " " + lastName;
-  let personImg = document.getElementById("person-image").src;
+    let id = JSON.parse(localStorage.getItem("counter"));
+    idIncrement();
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
+    let personName = firstName + " " + lastName;
+    let personImg = document.getElementById("person-image").src;
 
-  let today = new Date();
-  let dd = String(today.getDate()).padStart(2, "0");
-  let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-  let yyyy = today.getFullYear();
-  today = dd + "/" + mm + "/" + yyyy;
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, "0");
+    let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    let yyyy = today.getFullYear();
+    today = dd + "/" + mm + "/" + yyyy;
 
-  table1.push({
-    id: id,
-    nome: personName,
-    data: today,
-    role: "Admin",
-    status: "Active",
-    statusImg: "imgs\\green-circle.png",
-    img: personImg,
-  });
-  storageItems();
-  window.location.href = "dashboard.html";
+    table1.push({
+      id: id,
+      nome: personName,
+      data: today,
+      role: "Admin",
+      status: "Active",
+      statusImg: "imgs\\green-circle.png",
+      img: personImg,
+    });
+    storageItems();
+    location.href = "http://localhost:5500/dashboard.html";
+    //setTimeout(() => (location.href = "dashboard.html"), 500);
+    // window.open("dashboard.html");
+
+    return true;
+  } else {
+    alert("Phone number must have 8 or 9 digits");
+  }
 }
 
 function descBox() {
@@ -284,4 +295,84 @@ function descBox() {
   e.onmouseout = function() {
     document.getElementById("popup").style.display = "none";
   };
+}
+
+//mask using regex
+function phoneEvent() {
+  document.getElementById("phone").addEventListener("input", function(e) {
+    var x = e.target.value
+      .replace(/\D/g, "")
+      .match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+    e.target.value = !x[2]
+      ? x[1]
+      : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
+  });
+}
+
+function checkLength() {
+  var x = document.getElementById("phone");
+  if (x.value.length < 14) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+//mask using keyup and keydown
+function keyMask() {
+  const isNumericInput = event => {
+    const key = event.keyCode;
+    return (
+      (key >= 48 && key <= 57) || // Allow number line
+      (key >= 96 && key <= 105) // Allow number pad
+    );
+  };
+
+  const isModifierKey = event => {
+    const key = event.keyCode;
+    return (
+      event.shiftKey === true ||
+      key === 35 ||
+      key === 36 || // Allow Shift, Home, End
+      key === 8 ||
+      key === 9 ||
+      key === 13 ||
+      key === 46 || // Allow Backspace, Tab, Enter, Delete
+      (key > 36 && key < 41) || // Allow left, up, right, down
+      // Allow Ctrl/Command + A,C,V,X,Z
+      ((event.ctrlKey === true || event.metaKey === true) &&
+        (key === 65 || key === 67 || key === 86 || key === 88 || key === 90))
+    );
+  };
+
+  const enforceFormat = event => {
+    // Input must be of a valid number format or a modifier key, and not longer than ten digits
+    if (!isNumericInput(event) && !isModifierKey(event)) {
+      event.preventDefault();
+    }
+  };
+
+  const formatToPhone = event => {
+    if (isModifierKey(event)) {
+      return;
+    }
+
+    const target = event.target;
+    const input = target.value.replace(/\D/g, "").substring(0, 10); // First ten digits of input only
+    const zip = input.substring(0, 3);
+    const middle = input.substring(3, 6);
+    const last = input.substring(6, 10);
+
+    if (input.length > 6) {
+      target.value = `(${zip}) ${middle} - ${last}`;
+    } else if (input.length > 3) {
+      target.value = `(${zip}) ${middle}`;
+    } else if (input.length > 0) {
+      target.value = `(${zip}`;
+    }
+  };
+
+  const inputElement = document.getElementById("passportId");
+  inputElement.addEventListener("keydown", enforceFormat);
+  inputElement.addEventListener("keyup", formatToPhone);
 }
