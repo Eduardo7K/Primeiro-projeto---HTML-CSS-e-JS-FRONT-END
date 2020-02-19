@@ -78,144 +78,207 @@ function appendtable() {
   document.getElementById("tabela-dinamica").appendChild(table);
 }
 
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-function getUsers() {
+async function getUsers() {
   const url = "http://localhost:3003/api/users";
   const http = new XMLHttpRequest();
   http.open("GET", url);
   http.send();
-  http.onreadystatechange = e => {
-    console.log(http.responseText);
-    console.log(typeof http.responseText);
-    let table1 = JSON.parse(http.responseText);
-    console.log(table1.length);
-    console.log(typeof table1);
+  http.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      let table1 = JSON.parse(http.responseText);
 
-    console.log("teste");
-    console.log(table1);
-    console.log("teste");
-
-    updateTable(table1);
-
-    function updateTable(table1) {
-      for (var i = 0; i < table1.length; i++) {
-        tr = document.createElement("tr");
-
-        //for #
-        td = document.createElement("td");
-        td.innerHTML = table1[i].id;
-        td.className = "idClass";
-        tr.appendChild(td);
-
-        //for name
-        var divImg = document.createElement("div");
-        td = document.createElement("td");
-        td.className = "nameClass";
-        var span1 = document.createElement("span");
-        span1.innerHTML = table1[i].pName;
-        td.appendChild(span1);
-        td.appendChild(divImg);
-        divImg.id = "div-name";
-        divImg.appendChild(span1);
-
-        //for img
-        divImg.appendChild(document.createElement("img")).src = table1[i].img;
-        tr.appendChild(td);
-
-        //for date creation
-        td = document.createElement("td");
-        td.className = "dataClass";
-        td.innerHTML = table1[i].data;
-        tr.appendChild(td);
-
-        //for role
-        td = document.createElement("td");
-        td.className = "roleClass";
-        td.innerHTML = table1[i].role;
-        tr.appendChild(td);
-
-        //for status
-        td = document.createElement("td");
-        td.className = "statusClass";
-        td.innerHTML = table1[i].status;
-        tr.appendChild(td);
-
-        //for status img
-        td.appendChild(document.createElement("img")).src = table1[i].statusImg;
-        td.id = "td-statusImg";
-        tr.appendChild(td);
-
-        //for action
-        td = document.createElement("td");
-        td.className = "actionClass";
-        td.id = "td-action";
-
-        //for gear image
-        var gear1 = document.createElement("img");
-        gear1.src = "imgs\\engine.png";
-        td.appendChild(gear1);
-
-        //for delete image
-        var delImg = document.createElement("img");
-        delImg.src = "imgs\\x.png";
-        var tagA = document.createElement("a");
-
-        tagA.id = "a-tag";
-        let indexDel = i;
-        tagA.addEventListener("click", function() {
-          deleteUser([indexDel]);
-        });
-
-        tr.setAttribute("id", i);
-
-        tagA.appendChild(delImg);
-        td.appendChild(tagA);
-        tr.appendChild(td);
-
-        tbody.appendChild(tr);
-      }
+      updateTable(table1);
     }
   };
 }
 
-/*
-function checkLocalStorage() {
-  if (localStorage.getItem("users") === null) {
-    updateTable(table1);
-    storageItems();
-  } else {
-    localStoreItems();
+function updateTable(table1) {
+  for (var i = 0; i < table1.length; i++) {
+    tr = document.createElement("tr");
+
+    //for #
+    td = document.createElement("td");
+    td.innerHTML = table1[i].id;
+    td.className = "idClass";
+    tr.appendChild(td);
+
+    //for name
+    var divImg = document.createElement("div");
+    td = document.createElement("td");
+    td.className = "nameClass";
+    var span1 = document.createElement("span");
+    span1.innerHTML = table1[i].pName;
+    td.appendChild(span1);
+    td.appendChild(divImg);
+    divImg.id = "div-name";
+    divImg.appendChild(span1);
+
+    //for img
+    divImg.appendChild(document.createElement("img")).src = table1[i].img;
+    tr.appendChild(td);
+
+    //for date creation
+    td = document.createElement("td");
+    td.className = "dataClass";
+    td.innerHTML = table1[i].data;
+    tr.appendChild(td);
+
+    //for role
+    td = document.createElement("td");
+    td.className = "roleClass";
+    td.innerHTML = table1[i].role;
+    tr.appendChild(td);
+
+    //for status
+    td = document.createElement("td");
+    td.className = "statusClass";
+    td.innerHTML = table1[i].status;
+    tr.appendChild(td);
+
+    //for status img
+    td.appendChild(document.createElement("img")).src = table1[i].statusImg;
+    td.id = "td-statusImg";
+    tr.appendChild(td);
+
+    //for action
+    td = document.createElement("td");
+    td.className = "actionClass";
+    td.id = "td-action";
+
+    //for gear image
+    var gear1 = document.createElement("img");
+    gear1.src = "imgs\\engine.png";
+    td.appendChild(gear1);
+
+    //for delete image
+    var delImg = document.createElement("img");
+    delImg.src = "imgs\\x.png";
+    var tagA = document.createElement("a");
+
+    tagA.id = "a-tag";
+    let indexDel = table1[i].id;
+    tagA.addEventListener("click", function() {
+      deleteUser([indexDel]);
+    });
+
+    tr.setAttribute("id", i);
+
+    tagA.appendChild(delImg);
+    td.appendChild(tagA);
+    tr.appendChild(td);
+
+    tbody.appendChild(tr);
   }
 
-  if (localStorage.getItem("counter") === null) {
-    let id = 6;
-    localStorage.setItem("counter", id);
+  function descBox() {
+    var e = document.getElementById("question-image");
+    e.onmouseover = function() {
+      document.getElementById("popup").style.display = "block";
+    };
+    e.onmouseout = function() {
+      document.getElementById("popup").style.display = "none";
+    };
   }
-}
 
-function idIncrement() {
-  let id = JSON.parse(localStorage.getItem("counter")) + 1;
-  localStorage.setItem("counter", JSON.stringify(id));
-}
+  //mask using regex
+  function phoneEvent() {
+    document.getElementById("phone").addEventListener("input", function(e) {
+      var x = e.target.value
+        .replace(/\D/g, "")
+        .match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+      e.target.value = !x[2]
+        ? x[1]
+        : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
+    });
+  }
 
-function storageItems() {
-  console.log(Date.now() - 1580910400000);
-  localStorage.setItem("users", JSON.stringify(table1));
-  console.log(Date.now() - 1580910400000);
-}
+  function checkLength() {
+    var x = document.getElementById("phone");
+    if (x.value.length < 14) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
-function localStoreItems() {
-  table1 = JSON.parse(localStorage.getItem("users"));
+  //mask using keyup and keydown
+  function keyMask() {
+    const isNumericInput = event => {
+      const key = event.keyCode;
+      return (
+        (key >= 48 && key <= 57) || // Allow number line
+        (key >= 96 && key <= 105) // Allow number pad
+      );
+    };
 
-  updateTable(table1);
-}
+    const isModifierKey = event => {
+      const key = event.keyCode;
+      return (
+        event.shiftKey === true ||
+        key === 35 ||
+        key === 36 || // Allow Shift, Home, End
+        key === 8 ||
+        key === 9 ||
+        key === 13 ||
+        key === 46 || // Allow Backspace, Tab, Enter, Delete
+        (key > 36 && key < 41) || // Allow left, up, right, down
+        // Allow Ctrl/Command + A,C,V,X,Z
+        ((event.ctrlKey === true || event.metaKey === true) &&
+          (key === 65 || key === 67 || key === 86 || key === 88 || key === 90))
+      );
+    };
 
-function addNewItem() {
-  if (checkLength() == true) {
-    checkLocalStorage();
+    const enforceFormat = event => {
+      // Input must be of a valid number format or a modifier key, and not longer than ten digits
+      if (!isNumericInput(event) && !isModifierKey(event)) {
+        event.preventDefault();
+      }
+    };
 
-    let id = JSON.parse(localStorage.getItem("counter"));
-    idIncrement();
+    const formatToPhone = event => {
+      if (isModifierKey(event)) {
+        return;
+      }
+
+      const target = event.target;
+      const input = target.value.replace(/\D/g, "").substring(0, 10); // First ten digits of input only
+      const zip = input.substring(0, 3);
+      const middle = input.substring(3, 6);
+      const last = input.substring(6, 10);
+
+      if (input.length > 6) {
+        target.value = `(${zip}) ${middle} - ${last}`;
+      } else if (input.length > 3) {
+        target.value = `(${zip}) ${middle}`;
+      } else if (input.length > 0) {
+        target.value = `(${zip}`;
+      }
+    };
+
+    const inputElement = document.getElementById("passportId");
+    inputElement.addEventListener("keydown", enforceFormat);
+    inputElement.addEventListener("keyup", formatToPhone);
+  }
+
+  function deleteUser(i) {
+    if (confirm("Deseja realmente excluir?")) {
+      const url = `http://localhost:3003/api/users/${i}`;
+      console.log(i);
+      console.log(url);
+      const http = new XMLHttpRequest();
+      http.open("DELETE", url);
+      http.send();
+      http.onreadystatechange = e => {
+        console.log(http.responseText);
+      };
+
+      window.location.reload();
+    }
+  }
+
+  async function postUser() {
+    const url = "http://localhost:3003/api/users";
+
     let firstName = document.getElementById("firstName").value;
     let lastName = document.getElementById("lastName").value;
     let personName = firstName + " " + lastName;
@@ -227,176 +290,23 @@ function addNewItem() {
     let yyyy = today.getFullYear();
     today = dd + "/" + mm + "/" + yyyy;
 
-    table1.push({
-      id: id,
+    let user = {
       pName: personName,
       data: today,
       role: "Admin",
       status: "Active",
       statusImg: "imgs\\green-circle.png",
       img: personImg,
-    });
-
-    
-
-    storageItems();
-    location.href = "http://localhost:5500/dashboard.html";
-    //setTimeout(() => (location.href = "dashboard.html"), 500);
-    // window.open("dashboard.html");
-
-    return true;
-  } else {
-    alert("Phone number must have 8 or 9 digits");
-  }
-}
-*/
-
-function descBox() {
-  var e = document.getElementById("question-image");
-  e.onmouseover = function() {
-    document.getElementById("popup").style.display = "block";
-  };
-  e.onmouseout = function() {
-    document.getElementById("popup").style.display = "none";
-  };
-}
-
-//mask using regex
-function phoneEvent() {
-  document.getElementById("phone").addEventListener("input", function(e) {
-    var x = e.target.value
-      .replace(/\D/g, "")
-      .match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
-    e.target.value = !x[2]
-      ? x[1]
-      : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
-  });
-}
-
-function checkLength() {
-  var x = document.getElementById("phone");
-  if (x.value.length < 14) {
-    return false;
-  } else {
-    return true;
-  }
-}
-
-//mask using keyup and keydown
-function keyMask() {
-  const isNumericInput = event => {
-    const key = event.keyCode;
-    return (
-      (key >= 48 && key <= 57) || // Allow number line
-      (key >= 96 && key <= 105) // Allow number pad
-    );
-  };
-
-  const isModifierKey = event => {
-    const key = event.keyCode;
-    return (
-      event.shiftKey === true ||
-      key === 35 ||
-      key === 36 || // Allow Shift, Home, End
-      key === 8 ||
-      key === 9 ||
-      key === 13 ||
-      key === 46 || // Allow Backspace, Tab, Enter, Delete
-      (key > 36 && key < 41) || // Allow left, up, right, down
-      // Allow Ctrl/Command + A,C,V,X,Z
-      ((event.ctrlKey === true || event.metaKey === true) &&
-        (key === 65 || key === 67 || key === 86 || key === 88 || key === 90))
-    );
-  };
-
-  const enforceFormat = event => {
-    // Input must be of a valid number format or a modifier key, and not longer than ten digits
-    if (!isNumericInput(event) && !isModifierKey(event)) {
-      event.preventDefault();
-    }
-  };
-
-  const formatToPhone = event => {
-    if (isModifierKey(event)) {
-      return;
-    }
-
-    const target = event.target;
-    const input = target.value.replace(/\D/g, "").substring(0, 10); // First ten digits of input only
-    const zip = input.substring(0, 3);
-    const middle = input.substring(3, 6);
-    const last = input.substring(6, 10);
-
-    if (input.length > 6) {
-      target.value = `(${zip}) ${middle} - ${last}`;
-    } else if (input.length > 3) {
-      target.value = `(${zip}) ${middle}`;
-    } else if (input.length > 0) {
-      target.value = `(${zip}`;
-    }
-  };
-
-  const inputElement = document.getElementById("passportId");
-  inputElement.addEventListener("keydown", enforceFormat);
-  inputElement.addEventListener("keyup", formatToPhone);
-}
-
-/*function getUsers() {
-  const url = "http://localhost:3003/api/users";
-  const http = new XMLHttpRequest();
-  http.open("GET", url);
-  http.send();
-  http.onreadystatechange = e => {
-    console.log(http.responseText);
-  };
-}*/
-
-function deleteUser(i) {
-  if (confirm("Deseja realmente excluir?")) {
-    const url = `http://localhost:3003/api/users/${i}`;
-    console.log(i);
-    console.log(url);
-    const http = new XMLHttpRequest();
-    http.open("DELETE", url);
-    http.send();
-    http.onreadystatechange = e => {
-      console.log(http.responseText);
     };
+    console.log(user);
 
-    //setTimeout(() => window.location.reload(), 500);
+    await fetch(url, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
   }
-}
-
-async function postUser() {
-  const url = "http://localhost:3003/api/users";
-
-  let firstName = document.getElementById("firstName").value;
-  let lastName = document.getElementById("lastName").value;
-  let personName = firstName + " " + lastName;
-  let personImg = document.getElementById("person-image").src;
-
-  let today = new Date();
-  let dd = String(today.getDate()).padStart(2, "0");
-  let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-  let yyyy = today.getFullYear();
-  today = dd + "/" + mm + "/" + yyyy;
-
-  let user = {
-    pName: personName,
-    data: today,
-    role: "Admin",
-    status: "Active",
-    statusImg: "imgs\\green-circle.png",
-    img: personImg,
-  };
-  console.log(user);
-
-  await fetch(url, {
-    method: "post",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  });
 }
