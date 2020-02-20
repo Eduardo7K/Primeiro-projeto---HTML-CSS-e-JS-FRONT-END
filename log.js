@@ -71,6 +71,7 @@ tr.appendChild(th);
 thead.appendChild(tr);
 table.appendChild(thead);
 table.appendChild(tbody);
+tbody.id = "tbodyId";
 
 table.id = "formId";
 
@@ -169,144 +170,146 @@ function updateTable(table1) {
 
     tbody.appendChild(tr);
   }
+}
 
-  function descBox() {
-    var e = document.getElementById("question-image");
-    e.onmouseover = function() {
-      document.getElementById("popup").style.display = "block";
-    };
-    e.onmouseout = function() {
-      document.getElementById("popup").style.display = "none";
+function deleteUser(i) {
+  if (confirm("Deseja realmente excluir?")) {
+    const url = `http://localhost:3003/api/users/${i}`;
+    console.log(i);
+    console.log(url);
+    const http = new XMLHttpRequest();
+    http.open("DELETE", url);
+    http.send();
+    http.onreadystatechange = async function() {
+      if (this.readyState == 4 && this.status == 200) {
+        //getElementById("formId").removeChild();
+        let tBody = document.getElementById("tbodyId");
+        tBody.innerHTML = "";
+        await getUsers();
+      }
     };
   }
+}
 
-  //mask using regex
-  function phoneEvent() {
-    document.getElementById("phone").addEventListener("input", function(e) {
-      var x = e.target.value
-        .replace(/\D/g, "")
-        .match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
-      e.target.value = !x[2]
-        ? x[1]
-        : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
-    });
+async function postUser() {
+  const url = "http://localhost:3003/api/users";
+  let firstName = document.getElementById("firstName").value;
+  let lastName = document.getElementById("lastName").value;
+  let personName = firstName + " " + lastName;
+  let personImg = document.getElementById("person-image").src;
+
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, "0");
+  let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  let yyyy = today.getFullYear();
+  today = dd + "/" + mm + "/" + yyyy;
+
+  let user = {
+    pName: personName,
+    data: today,
+    role: "Admin",
+    status: "Active",
+    statusImg: "imgs\\green-circle.png",
+    img: personImg,
+  };
+  console.log(user);
+
+  await fetch(url, {
+    method: "post",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+}
+
+function descBox() {
+  var e = document.getElementById("question-image");
+  e.onmouseover = function() {
+    document.getElementById("popup").style.display = "block";
+  };
+  e.onmouseout = function() {
+    document.getElementById("popup").style.display = "none";
+  };
+}
+
+//mask using regex
+function phoneEvent() {
+  document.getElementById("phone").addEventListener("input", function(e) {
+    var x = e.target.value
+      .replace(/\D/g, "")
+      .match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+    e.target.value = !x[2]
+      ? x[1]
+      : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
+  });
+}
+
+function checkLength() {
+  var x = document.getElementById("phone");
+  if (x.value.length < 14) {
+    return false;
+  } else {
+    return true;
   }
+}
 
-  function checkLength() {
-    var x = document.getElementById("phone");
-    if (x.value.length < 14) {
-      return false;
-    } else {
-      return true;
+//mask using keyup and keydown
+function keyMask() {
+  const isNumericInput = event => {
+    const key = event.keyCode;
+    return (
+      (key >= 48 && key <= 57) || // Allow number line
+      (key >= 96 && key <= 105) // Allow number pad
+    );
+  };
+
+  const isModifierKey = event => {
+    const key = event.keyCode;
+    return (
+      event.shiftKey === true ||
+      key === 35 ||
+      key === 36 || // Allow Shift, Home, End
+      key === 8 ||
+      key === 9 ||
+      key === 13 ||
+      key === 46 || // Allow Backspace, Tab, Enter, Delete
+      (key > 36 && key < 41) || // Allow left, up, right, down
+      // Allow Ctrl/Command + A,C,V,X,Z
+      ((event.ctrlKey === true || event.metaKey === true) &&
+        (key === 65 || key === 67 || key === 86 || key === 88 || key === 90))
+    );
+  };
+
+  const enforceFormat = event => {
+    // Input must be of a valid number format or a modifier key, and not longer than ten digits
+    if (!isNumericInput(event) && !isModifierKey(event)) {
+      event.preventDefault();
     }
-  }
+  };
 
-  //mask using keyup and keydown
-  function keyMask() {
-    const isNumericInput = event => {
-      const key = event.keyCode;
-      return (
-        (key >= 48 && key <= 57) || // Allow number line
-        (key >= 96 && key <= 105) // Allow number pad
-      );
-    };
-
-    const isModifierKey = event => {
-      const key = event.keyCode;
-      return (
-        event.shiftKey === true ||
-        key === 35 ||
-        key === 36 || // Allow Shift, Home, End
-        key === 8 ||
-        key === 9 ||
-        key === 13 ||
-        key === 46 || // Allow Backspace, Tab, Enter, Delete
-        (key > 36 && key < 41) || // Allow left, up, right, down
-        // Allow Ctrl/Command + A,C,V,X,Z
-        ((event.ctrlKey === true || event.metaKey === true) &&
-          (key === 65 || key === 67 || key === 86 || key === 88 || key === 90))
-      );
-    };
-
-    const enforceFormat = event => {
-      // Input must be of a valid number format or a modifier key, and not longer than ten digits
-      if (!isNumericInput(event) && !isModifierKey(event)) {
-        event.preventDefault();
-      }
-    };
-
-    const formatToPhone = event => {
-      if (isModifierKey(event)) {
-        return;
-      }
-
-      const target = event.target;
-      const input = target.value.replace(/\D/g, "").substring(0, 10); // First ten digits of input only
-      const zip = input.substring(0, 3);
-      const middle = input.substring(3, 6);
-      const last = input.substring(6, 10);
-
-      if (input.length > 6) {
-        target.value = `(${zip}) ${middle} - ${last}`;
-      } else if (input.length > 3) {
-        target.value = `(${zip}) ${middle}`;
-      } else if (input.length > 0) {
-        target.value = `(${zip}`;
-      }
-    };
-
-    const inputElement = document.getElementById("passportId");
-    inputElement.addEventListener("keydown", enforceFormat);
-    inputElement.addEventListener("keyup", formatToPhone);
-  }
-
-  function deleteUser(i) {
-    if (confirm("Deseja realmente excluir?")) {
-      const url = `http://localhost:3003/api/users/${i}`;
-      console.log(i);
-      console.log(url);
-      const http = new XMLHttpRequest();
-      http.open("DELETE", url);
-      http.send();
-      http.onreadystatechange = e => {
-        console.log(http.responseText);
-      };
-
-      window.location.reload();
+  const formatToPhone = event => {
+    if (isModifierKey(event)) {
+      return;
     }
-  }
 
-  async function postUser() {
-    const url = "http://localhost:3003/api/users";
+    const target = event.target;
+    const input = target.value.replace(/\D/g, "").substring(0, 10); // First ten digits of input only
+    const zip = input.substring(0, 3);
+    const middle = input.substring(3, 6);
+    const last = input.substring(6, 10);
 
-    let firstName = document.getElementById("firstName").value;
-    let lastName = document.getElementById("lastName").value;
-    let personName = firstName + " " + lastName;
-    let personImg = document.getElementById("person-image").src;
+    if (input.length > 6) {
+      target.value = `(${zip}) ${middle} - ${last}`;
+    } else if (input.length > 3) {
+      target.value = `(${zip}) ${middle}`;
+    } else if (input.length > 0) {
+      target.value = `(${zip}`;
+    }
+  };
 
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, "0");
-    let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-    let yyyy = today.getFullYear();
-    today = dd + "/" + mm + "/" + yyyy;
-
-    let user = {
-      pName: personName,
-      data: today,
-      role: "Admin",
-      status: "Active",
-      statusImg: "imgs\\green-circle.png",
-      img: personImg,
-    };
-    console.log(user);
-
-    await fetch(url, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-  }
+  const inputElement = document.getElementById("passportId");
+  inputElement.addEventListener("keydown", enforceFormat);
+  inputElement.addEventListener("keyup", formatToPhone);
 }
