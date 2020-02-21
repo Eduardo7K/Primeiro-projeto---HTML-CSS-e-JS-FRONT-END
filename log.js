@@ -108,7 +108,8 @@ function updateTable(table1) {
     td = document.createElement("td");
     td.className = "nameClass";
     var span1 = document.createElement("span");
-    span1.innerHTML = table1[i].pName;
+    let fullName = table1[i].firstName + " " + table1[i].lastName;
+    span1.innerHTML = fullName;
     td.appendChild(span1);
     td.appendChild(divImg);
     divImg.id = "div-name";
@@ -151,15 +152,27 @@ function updateTable(table1) {
     gear1.src = "imgs\\engine.png";
     td.appendChild(gear1);
 
+    //edit image
+    var editImage = document.createElement("img");
+    editImage.src = "imgs\\edit.png";
+    td.appendChild(editImage);
+    var editLink = document.createElement("a");
+    editLink.id = "edit-link";
+    let indexItem = table1[i].id;
+    editLink.addEventListener("click", function() {
+      editUser([indexItem]);
+    });
+    editLink.appendChild(editImage);
+    td.appendChild(editLink);
+
     //for delete image
     var delImg = document.createElement("img");
     delImg.src = "imgs\\x.png";
     var tagA = document.createElement("a");
 
     tagA.id = "a-tag";
-    let indexDel = table1[i].id;
     tagA.addEventListener("click", function() {
-      deleteUser([indexDel]);
+      deleteUser([indexItem]);
     });
 
     tr.setAttribute("id", i);
@@ -172,22 +185,65 @@ function updateTable(table1) {
   }
 }
 
+function editUser(id) {
+  window.location.href = "form.html?id=" + id;
+}
+
 function deleteUser(i) {
-  if (confirm("Deseja realmente excluir?")) {
-    const url = `http://localhost:3003/api/users/${i}`;
-    console.log(i);
-    console.log(url);
+  if (!confirm("Deseja realmente excluir?")) {
+    return;
+  }
+
+  const url = `http://localhost:3003/api/users/${i}`;
+  const http = new XMLHttpRequest();
+  http.open("DELETE", url);
+  http.send();
+  http.onreadystatechange = async function() {
+    if (this.readyState != 4 || this.status != 200) {
+      return;
+    }
+
+    let tBody = document.getElementById("tbodyId");
+    tBody.innerHTML = "";
+    await getUsers();
+  };
+}
+
+function fillTheFields() {
+  let params = new URL(location).searchParams;
+  let idUser = parseInt(params.get("id"));
+  console.log("fill the fields rodando");
+
+  if (!idUser) {
+    return;
+  } else {
+    const url = "http://localhost:3003/api/users/";
     const http = new XMLHttpRequest();
-    http.open("DELETE", url);
+    http.open("GET", url);
     http.send();
-    http.onreadystatechange = async function() {
+    http.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        //getElementById("formId").removeChild();
-        let tBody = document.getElementById("tbodyId");
-        tBody.innerHTML = "";
-        await getUsers();
+        let users = JSON.parse(http.responseText);
+
+        const index = users.findIndex(x => x.id === parseInt(idUser));
+
+        document.getElementById("firstName").value = users[index].firstName;
+        document.getElementById("lastName").value = users[index].lastName;
       }
     };
+  }
+}
+
+function checkActionToDo() {
+  let params = new URL(location).searchParams;
+  let idUser = params.get("id");
+
+  if (!idUser) {
+    //se o ID não existir
+    postUser();
+  } else {
+    //se o ID tiver valor
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2@@ chamar PUT
   }
 }
 
@@ -195,7 +251,7 @@ async function postUser() {
   const url = "http://localhost:3003/api/users";
   let firstName = document.getElementById("firstName").value;
   let lastName = document.getElementById("lastName").value;
-  let personName = firstName + " " + lastName;
+
   let personImg = document.getElementById("person-image").src;
 
   let today = new Date();
@@ -205,7 +261,8 @@ async function postUser() {
   today = dd + "/" + mm + "/" + yyyy;
 
   let user = {
-    pName: personName,
+    firstName: firstName,
+    lastName: lastName,
     data: today,
     role: "Admin",
     status: "Active",
