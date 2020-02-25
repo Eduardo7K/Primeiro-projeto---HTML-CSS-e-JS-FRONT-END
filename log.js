@@ -209,10 +209,22 @@ function deleteUser(i) {
   };
 }
 
+function checkActionToDo() {
+  let params = new URL(location).searchParams;
+  let idUser = params.get("id");
+
+  if (!idUser) {
+    //se o ID não existir
+    postUser();
+  } else {
+    //se o ID tiver valor
+    putUser(idUser);
+  }
+}
+
 function fillTheFields() {
   let params = new URL(location).searchParams;
   let idUser = parseInt(params.get("id"));
-  console.log("fill the fields rodando");
 
   if (!idUser) {
     return;
@@ -229,22 +241,65 @@ function fillTheFields() {
 
         document.getElementById("firstName").value = users[index].firstName;
         document.getElementById("lastName").value = users[index].lastName;
+        document.getElementById("language").value = users[index].language;
+        document.getElementById("phone").value = users[index].mobilePhone;
+        document.getElementById("emailId").value = users[index].email;
+        document.getElementById("birthday").value = users[index].birthday;
+        document.getElementById("month").value = users[index].month;
+        document.getElementById("year").value = users[index].year;
+        document.getElementById("person-image").src = users[index].img;
       }
     };
   }
 }
 
-function checkActionToDo() {
-  let params = new URL(location).searchParams;
-  let idUser = params.get("id");
+async function putUser(idUser) {
+  debugger;
+  const url = `http://localhost:3003/api/users/:${idUser}`;
+  console.log(url);
+  let firstName = document.getElementById("firstName").value;
+  let lastName = document.getElementById("lastName").value;
 
-  if (!idUser) {
-    //se o ID não existir
-    postUser();
-  } else {
-    //se o ID tiver valor
-    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2@@ chamar PUT
-  }
+  let personImg = document.getElementById("person-image").src;
+
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, "0");
+  let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  let yyyy = today.getFullYear();
+  today = dd + "/" + mm + "/" + yyyy;
+
+  let language = document.getElementById("language").value;
+  let mobilePhone = document.getElementById("phone").value;
+  let birthValue = document.getElementById("birthday").value;
+  let monthValue = document.getElementById("month").value;
+  let yearValue = document.getElementById("year").value;
+  let email = document.getElementById("emailId").value;
+
+  let user = {
+    idUser: idUser,
+    firstName: firstName,
+    lastName: lastName,
+    data: today,
+    role: "Admin",
+    status: "Active",
+    statusImg: "imgs\\green-circle.png",
+    img: personImg,
+    language: language,
+    mobilePhone: mobilePhone,
+    birthday: birthValue,
+    month: monthValue,
+    year: yearValue,
+    email: email,
+  };
+  debugger;
+  await fetch(url, {
+    method: "put",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
 }
 
 async function postUser() {
@@ -260,6 +315,13 @@ async function postUser() {
   let yyyy = today.getFullYear();
   today = dd + "/" + mm + "/" + yyyy;
 
+  let language = document.getElementById("language").value;
+  let mobilePhone = document.getElementById("phone").value;
+  let birthValue = document.getElementById("birthday").value;
+  let monthValue = document.getElementById("month").value;
+  let yearValue = document.getElementById("year").value;
+  let email = document.getElementById("emailId").value;
+
   let user = {
     firstName: firstName,
     lastName: lastName,
@@ -268,8 +330,13 @@ async function postUser() {
     status: "Active",
     statusImg: "imgs\\green-circle.png",
     img: personImg,
+    language: language,
+    mobilePhone: mobilePhone,
+    birthday: birthValue,
+    month: monthValue,
+    year: yearValue,
+    email: email,
   };
-  console.log(user);
 
   await fetch(url, {
     method: "post",
