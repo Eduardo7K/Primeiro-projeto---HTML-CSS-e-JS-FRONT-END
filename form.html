@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="#" />
   </head>
 
-  <body onload="fillTheFields()">
+  <body onload="verificarLogin();fillTheFields()">
     <form id="form" onsubmit="checkActionToDo()" action="dashboard.html">
       <h1>About you</h1>
       <p>Tell us who you are! You can modify your personal information here.</p>
@@ -229,17 +229,29 @@
           <option value="1930">1930</option>
         </select>
       </div>
-      Language
+      <div>Language <span id="pass-span">Password</span></div>
       <div>
         <div style="display: inline-block;">
           <input
-            class="bigInputs"
+            class="inputs"
             type="text"
             name=""
             size="86"
             placeholder="English"
             id="language"
             required
+          />
+          <span class="asterisk_input"> </span>
+        </div>
+
+        <div style="display: inline-block;">
+          <input
+            type="password"
+            class="inputs"
+            name=""
+            size="39"
+            placeholder="enter your password"
+            id="passId"
           />
           <span class="asterisk_input"> </span>
         </div>

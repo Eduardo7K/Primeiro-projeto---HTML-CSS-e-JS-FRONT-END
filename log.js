@@ -1,16 +1,63 @@
-function botaoLogin() {
-  var login = document.getElementById("login-field").value;
-  var senha = document.getElementById("password-field").value;
-  //alert ("login informado: " + login + " senha informada: " + senha);
+async function loginButton() {
+  const url = "http://localhost:3003/api/users/login";
 
-  if (login == "admin" && senha == "lyncas@2020") {
-    alert("Login efetuado!");
+  let email = document.getElementById("login-field").value;
+  let password = document.getElementById("password-field").value;
+
+  let user = {
+    email: email,
+    password: password,
+  };
+
+  const data = await fetch(url, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+
+  const token = await data.json();
+  debugger;
+  if (token["token"]) {
+    sessionStorage.setItem("token", token["token"]);
     window.location.href = "dashboard.html";
   } else {
     alert("Usuário ou senha inválidos.");
   }
 }
 
+async function clearToken() {
+  const url = "http://localhost:3003/api/users/cleartoken";
+  const validar = await fetch(url, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+}
+
+async function verificarLogin() {
+  if (!sessionStorage.getItem("token")) {
+    clearToken();
+    //se o session storage estiver vazio, enviar req para o backend limpar a var token
+  }
+  const url = "http://localhost:3003/api/users/verificar";
+  const validar = await fetch(url, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ token: sessionStorage.getItem("token") }),
+  });
+  const v = await validar.json();
+  if (!v) {
+    window.location.href = "login.html";
+  }
+}
 function readFile() {
   // debugger;
   document.getElementById("upload-file").onchange = function() {
@@ -108,7 +155,7 @@ function updateTable(table1) {
     td = document.createElement("td");
     td.className = "nameClass";
     var span1 = document.createElement("span");
-    let fullName = table1[i].firstName + " " + table1[i].lastName;
+    let fullName = table1[i].firstname + " " + table1[i].lastname;
     span1.innerHTML = fullName;
     td.appendChild(span1);
     td.appendChild(divImg);
@@ -122,7 +169,7 @@ function updateTable(table1) {
     //for date creation
     td = document.createElement("td");
     td.className = "dataClass";
-    td.innerHTML = table1[i].data;
+    td.innerHTML = dayjs(table1[i].data).format("DD/MM/YYYY");
     tr.appendChild(td);
 
     //for role
@@ -138,7 +185,7 @@ function updateTable(table1) {
     tr.appendChild(td);
 
     //for status img
-    td.appendChild(document.createElement("img")).src = table1[i].statusImg;
+    td.appendChild(document.createElement("img")).src = table1[i].statusimg;
     td.id = "td-statusImg";
     tr.appendChild(td);
 
@@ -239,10 +286,10 @@ function fillTheFields() {
 
         const index = users.findIndex(x => x.id === parseInt(idUser));
 
-        document.getElementById("firstName").value = users[index].firstName;
-        document.getElementById("lastName").value = users[index].lastName;
+        document.getElementById("firstName").value = users[index].firstname;
+        document.getElementById("lastName").value = users[index].lastname;
         document.getElementById("language").value = users[index].language;
-        document.getElementById("phone").value = users[index].mobilePhone;
+        document.getElementById("phone").value = users[index].mobilephone;
         document.getElementById("emailId").value = users[index].email;
         document.getElementById("birthday").value = users[index].birthday;
         document.getElementById("month").value = users[index].month;
@@ -254,7 +301,6 @@ function fillTheFields() {
 }
 
 async function putUser(idUser) {
-  debugger;
   const url = `http://localhost:3003/api/users/:${idUser}`;
   console.log(url);
   let firstName = document.getElementById("firstName").value;
@@ -276,22 +322,22 @@ async function putUser(idUser) {
   let email = document.getElementById("emailId").value;
 
   let user = {
-    idUser: idUser,
-    firstName: firstName,
-    lastName: lastName,
+    iduser: idUser,
+    firstname: firstName,
+    lastname: lastName,
     data: today,
     role: "Admin",
     status: "Active",
-    statusImg: "imgs\\green-circle.png",
+    statusimg: "imgs\\green-circle.png",
     img: personImg,
     language: language,
-    mobilePhone: mobilePhone,
+    mobilephone: mobilePhone,
     birthday: birthValue,
     month: monthValue,
     year: yearValue,
     email: email,
   };
-  debugger;
+
   await fetch(url, {
     method: "put",
     headers: {
@@ -321,21 +367,23 @@ async function postUser() {
   let monthValue = document.getElementById("month").value;
   let yearValue = document.getElementById("year").value;
   let email = document.getElementById("emailId").value;
+  let password = document.getElementById("passId").value;
 
   let user = {
-    firstName: firstName,
-    lastName: lastName,
+    firstname: firstName,
+    lastname: lastName,
     data: today,
     role: "Admin",
     status: "Active",
-    statusImg: "imgs\\green-circle.png",
+    statusimg: "imgs\\green-circle.png",
     img: personImg,
     language: language,
-    mobilePhone: mobilePhone,
+    mobilephone: mobilePhone,
     birthday: birthValue,
     month: monthValue,
     year: yearValue,
     email: email,
+    password: password,
   };
 
   await fetch(url, {
