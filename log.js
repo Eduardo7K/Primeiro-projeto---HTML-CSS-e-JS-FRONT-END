@@ -1,8 +1,8 @@
 async function loginButton() {
   const url = "http://localhost:3003/api/users/login";
 
-  let email = document.getElementById("login-field").value;
-  let password = document.getElementById("password-field").value;
+  let email = $("#login-field").val();
+  let password = $("#password-field").val();
 
   let user = {
     email: email,
@@ -19,7 +19,7 @@ async function loginButton() {
   });
 
   const token = await data.json();
-  debugger;
+
   if (token["token"]) {
     sessionStorage.setItem("token", token["token"]);
     window.location.href = "dashboard.html";
@@ -58,72 +58,54 @@ async function verificarLogin() {
     window.location.href = "login.html";
   }
 }
+
 function readFile() {
-  // debugger;
-  document.getElementById("upload-file").onchange = function() {
-    // debugger;
+  $("#upload-file").on("change", function() {
     var reader = new FileReader();
 
     reader.onload = function(e) {
-      // get loaded data and render thumbnail.
-      document.getElementById("person-image").src = e.target.result;
+      $("#person-image").attr("src", e.target.result);
     };
 
     // read the image file as a data URL.
-    //console.log(this.files[0]);
     reader.readAsDataURL(this.files[0]);
-  };
+  });
 }
 
 function deleteImage() {
-  document.getElementById("upload-file").value = null;
-  document.getElementById("person-image").src = "imgs\\person.png";
+  $("#upload-file").val(null);
+  $("#person-image").attr("src", "imgs\\person.png");
 }
 
 function newUser() {
   window.location.href = "form.html";
 }
 
-var table = document.createElement("table"),
-  thead = document.createElement("thead"),
-  tbody = document.createElement("tbody"),
+var table = $(`<table id="formId"></table>`),
+  thead = $("<thead></thead>"),
+  tbody = $(`<tbody id="tbodyId"></tbody>`),
   th,
-  tr = document.createElement("tr"),
+  tr = $("<tr></tr>"),
   td;
 
-th = document.createElement("th");
-th.innerHTML = "#";
-tr.appendChild(th);
+var table = $("#formId");
 
-th = document.createElement("th");
-th.innerHTML = "Name";
-tr.appendChild(th);
+// var table = $().createElement('table');
+// table.attr('id', 'formId');
 
-th = document.createElement("th");
-th.innerHTML = "Date created";
-tr.appendChild(th);
+$(tr).append("<th>#</th>");
+$(tr).append("<th>Name</th>");
+$(tr).append("<th>Date created</th>");
+$(tr).append("<th>Role</th>");
+$(tr).append("<th>Status</th>");
+$(tr).append("<th>Action</th>");
 
-th = document.createElement("th");
-th.innerHTML = "Role";
-tr.appendChild(th);
-
-th = document.createElement("th");
-th.innerHTML = "Status";
-tr.appendChild(th);
-
-th = document.createElement("th");
-th.innerHTML = "Action";
-tr.appendChild(th);
-
-thead.appendChild(tr);
-table.appendChild(thead);
-table.appendChild(tbody);
-tbody.id = "tbodyId";
-
-table.id = "formId";
+$(thead).append(tr);
+$(table).append(thead);
+$(table).append(tbody);
 
 function appendtable() {
-  document.getElementById("tabela-dinamica").appendChild(table);
+  $("#tabela-dinamica").append(table);
 }
 
 async function getUsers() {
@@ -145,90 +127,46 @@ function updateTable(table1) {
     tr = document.createElement("tr");
 
     //for #
-    td = document.createElement("td");
-    td.innerHTML = table1[i].id;
-    td.className = "idClass";
-    tr.appendChild(td);
 
-    //for name
-    var divImg = document.createElement("div");
-    td = document.createElement("td");
-    td.className = "nameClass";
-    var span1 = document.createElement("span");
-    let fullName = table1[i].firstname + " " + table1[i].lastname;
-    span1.innerHTML = fullName;
-    td.appendChild(span1);
-    td.appendChild(divImg);
-    divImg.id = "div-name";
-    divImg.appendChild(span1);
+    $(tr).append(`<td class="idClass">${table1[i].id}</td>`);
 
-    //for img
-    divImg.appendChild(document.createElement("img")).src = table1[i].img;
-    tr.appendChild(td);
+    //for name e image
+
+    $(tr).append(
+      `<td class="nameClass"><div id="div-name"><span>${table1[i].firstname +
+        " " +
+        table1[i].lastname}</span><img src="${table1[i].img}">  </div></td>`,
+    );
 
     //for date creation
-    td = document.createElement("td");
-    td.className = "dataClass";
-    td.innerHTML = dayjs(table1[i].data).format("DD/MM/YYYY");
-    tr.appendChild(td);
+
+    $(tr).append(
+      `<td class="dataClass">${dayjs(table1[i].data).format(
+        "DD/MM/YYYY",
+      )}</td>`,
+    );
 
     //for role
-    td = document.createElement("td");
-    td.className = "roleClass";
-    td.innerHTML = table1[i].role;
-    tr.appendChild(td);
 
-    //for status
-    td = document.createElement("td");
-    td.className = "statusClass";
-    td.innerHTML = table1[i].status;
-    tr.appendChild(td);
+    $(tr).append(`<td class="roleClass">${table1[i].role}</td>`);
 
-    //for status img
-    td.appendChild(document.createElement("img")).src = table1[i].statusimg;
-    td.id = "td-statusImg";
-    tr.appendChild(td);
+    //for status e status img
 
-    //for action
-    td = document.createElement("td");
-    td.className = "actionClass";
-    td.id = "td-action";
+    $(tr).append(
+      `<td class="statusClass" id="td-statusImg"><img src="${table1[i].statusimg}"> ${table1[i].status}</td>`,
+    );
 
-    //for gear image
-    var gear1 = document.createElement("img");
-    gear1.src = "imgs\\engine.png";
-    td.appendChild(gear1);
+    //for action buttons
 
-    //edit image
-    var editImage = document.createElement("img");
-    editImage.src = "imgs\\edit.png";
-    td.appendChild(editImage);
-    var editLink = document.createElement("a");
-    editLink.id = "edit-link";
     let indexItem = table1[i].id;
-    editLink.addEventListener("click", function() {
-      editUser([indexItem]);
-    });
-    editLink.appendChild(editImage);
-    td.appendChild(editLink);
 
-    //for delete image
-    var delImg = document.createElement("img");
-    delImg.src = "imgs\\x.png";
-    var tagA = document.createElement("a");
-
-    tagA.id = "a-tag";
-    tagA.addEventListener("click", function() {
-      deleteUser([indexItem]);
-    });
+    $(tr).append(
+      `<td class="actionClass" id="td-action"><img src="imgs\\engine.png"><a id="edit-link" onclick="editUser([${indexItem}])"><img src="imgs\\edit.png"></a><a id="a-tag" onclick="deleteUser([${indexItem}])"><img src="imgs\\x.png"></a></td>`,
+    );
 
     tr.setAttribute("id", i);
 
-    tagA.appendChild(delImg);
-    td.appendChild(tagA);
-    tr.appendChild(td);
-
-    tbody.appendChild(tr);
+    $(tbody).append(tr);
   }
 }
 
@@ -250,7 +188,7 @@ function deleteUser(i) {
       return;
     }
 
-    let tBody = document.getElementById("tbodyId");
+    let tBody = $("#tbodyId")[0];
     tBody.innerHTML = "";
     await getUsers();
   };
@@ -286,15 +224,18 @@ function fillTheFields() {
 
         const index = users.findIndex(x => x.id === parseInt(idUser));
 
-        document.getElementById("firstName").value = users[index].firstname;
-        document.getElementById("lastName").value = users[index].lastname;
-        document.getElementById("language").value = users[index].language;
-        document.getElementById("phone").value = users[index].mobilephone;
-        document.getElementById("emailId").value = users[index].email;
-        document.getElementById("birthday").value = users[index].birthday;
-        document.getElementById("month").value = users[index].month;
-        document.getElementById("year").value = users[index].year;
-        document.getElementById("person-image").src = users[index].img;
+        //$("h1").text("Edit user information");
+
+        $("#firstName").val(users[index].firstname);
+        $("#lastName").val(users[index].lastname);
+        $("#language").val(users[index].language);
+        $("#phone").val(users[index].mobilephone);
+        $("#emailId").val(users[index].email);
+        $("#birthday").val(users[index].birthday);
+        $("#month").val(users[index].month);
+        $("#year").val(users[index].year);
+        $("#person-image").attr("src", users[index].img);
+        $("#passId").attr("disabled", "disabled");
       }
     };
   }
@@ -302,11 +243,11 @@ function fillTheFields() {
 
 async function putUser(idUser) {
   const url = `http://localhost:3003/api/users/:${idUser}`;
-  console.log(url);
-  let firstName = document.getElementById("firstName").value;
-  let lastName = document.getElementById("lastName").value;
 
-  let personImg = document.getElementById("person-image").src;
+  let firstName = $("#firstName").val();
+  let lastName = $("#lastName").val();
+
+  let personImg = $("#person-image").attr("src");
 
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, "0");
@@ -314,12 +255,12 @@ async function putUser(idUser) {
   let yyyy = today.getFullYear();
   today = dd + "/" + mm + "/" + yyyy;
 
-  let language = document.getElementById("language").value;
-  let mobilePhone = document.getElementById("phone").value;
-  let birthValue = document.getElementById("birthday").value;
-  let monthValue = document.getElementById("month").value;
-  let yearValue = document.getElementById("year").value;
-  let email = document.getElementById("emailId").value;
+  let language = $("#language").val();
+  let mobilePhone = $("#phone").val();
+  let birthValue = $("#birthday").val();
+  let monthValue = $("#month").val();
+  let yearValue = $("#year").val();
+  let email = $("#emailId").val();
 
   let user = {
     iduser: idUser,
@@ -350,10 +291,11 @@ async function putUser(idUser) {
 
 async function postUser() {
   const url = "http://localhost:3003/api/users";
-  let firstName = document.getElementById("firstName").value;
-  let lastName = document.getElementById("lastName").value;
 
-  let personImg = document.getElementById("person-image").src;
+  let firstName = $("#firstName").val();
+  let lastName = $("#lastName").val();
+
+  let personImg = $("#person-image").attr("src");
 
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, "0");
@@ -361,13 +303,13 @@ async function postUser() {
   let yyyy = today.getFullYear();
   today = dd + "/" + mm + "/" + yyyy;
 
-  let language = document.getElementById("language").value;
-  let mobilePhone = document.getElementById("phone").value;
-  let birthValue = document.getElementById("birthday").value;
-  let monthValue = document.getElementById("month").value;
-  let yearValue = document.getElementById("year").value;
-  let email = document.getElementById("emailId").value;
-  let password = document.getElementById("passId").value;
+  let language = $("#language").val();
+  let mobilePhone = $("#phone").val();
+  let birthValue = $("#birthday").val();
+  let monthValue = $("#month").val();
+  let yearValue = $("#year").val();
+  let email = $("#emailId").val();
+  let password = $("#passId").val();
 
   let user = {
     firstname: firstName,
@@ -397,18 +339,21 @@ async function postUser() {
 }
 
 function descBox() {
-  var e = document.getElementById("question-image");
+  var e = $("#question-image")[0];
   e.onmouseover = function() {
-    document.getElementById("popup").style.display = "block";
+    //document.getElementById("popup").style.display = "block";
+    //$("#popup").css("display", "block");
+    $("#popup").show();
   };
   e.onmouseout = function() {
-    document.getElementById("popup").style.display = "none";
+    //document.getElementById("popup").style.display = "none";
+    $("#popup").hide();
   };
 }
 
 //mask using regex
 function phoneEvent() {
-  document.getElementById("phone").addEventListener("input", function(e) {
+  $("#phone").on("input", function(e) {
     var x = e.target.value
       .replace(/\D/g, "")
       .match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
@@ -416,15 +361,6 @@ function phoneEvent() {
       ? x[1]
       : "(" + x[1] + ") " + x[2] + (x[3] ? "-" + x[3] : "");
   });
-}
-
-function checkLength() {
-  var x = document.getElementById("phone");
-  if (x.value.length < 14) {
-    return false;
-  } else {
-    return true;
-  }
 }
 
 //mask using keyup and keydown
@@ -455,7 +391,7 @@ function keyMask() {
   };
 
   const enforceFormat = event => {
-    // Input must be of a valid number format or a modifier key, and not longer than ten digits
+    // Input must be of a valid number format or a modifier key
     if (!isNumericInput(event) && !isModifierKey(event)) {
       event.preventDefault();
     }
@@ -481,7 +417,7 @@ function keyMask() {
     }
   };
 
-  const inputElement = document.getElementById("passportId");
-  inputElement.addEventListener("keydown", enforceFormat);
-  inputElement.addEventListener("keyup", formatToPhone);
+  const inputElement = $("#passportId")[0];
+  $(inputElement).on("keydown", enforceFormat);
+  $(inputElement).on("keyup", formatToPhone);
 }

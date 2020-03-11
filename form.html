@@ -252,6 +252,7 @@
             size="39"
             placeholder="enter your password"
             id="passId"
+            required
           />
           <span class="asterisk_input"> </span>
         </div>
@@ -309,9 +310,9 @@
             placeholder="ex. 639842879"
             id="phone"
             onclick="phoneEvent();"
-            minlength="14"
-            maxlength="15"
+            pattern=".{14,}"
             required
+            title="10 characters minimum"
           />
           <span class="asterisk_input"> </span>
         </div>
@@ -351,7 +352,11 @@
         Save changes
       </button>
     </form>
-
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
     <script type=" text/javascript" src="log.js"></script>
   </body>
 </html>
