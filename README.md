@@ -4,19 +4,17 @@ Front-end do projeto criado para consolidar o aprendizado básico sobre HTML, CS
 
 REGRAS DA TELA:
 
-
 1 - Criar uma tela de login HTML + CSS igual modelo
 
 ![](imgs/TelaLogin.JPG)
 
-O botão login deve levar ao item 2 somente se usuário e senha forem exatamente "admin" e "senha@2020". 
+O botão login deve levar ao item 2 somente se usuário e senha forem exatamente "admin" e "senha@2020".
 
 Caso contrário deve exibir um alerta com a mensagem: "Usuário ou senha inválidos".
 
 O layout deve respeitar EXATAMENTE o modelo. O background é o único que pode ser diferente.
 
 Fonte do texto, tamanho da fonte, negrito ou não, alinhamento dos componentes e botões devem ser replicados.
-
 
 2 - Criar tela de dashboard igual modelo
 
@@ -40,8 +38,6 @@ No meu projeto eu adicionei um botão para editar as informações, esse botão 
 
 O botão "Add new user" irá chamar a tela abaixo descrita no item 3.
 
-
-
 3 - Criar formulário de edição conforme modelo
 
 ![](imgs/TelaFormulario.JPG)
@@ -56,8 +52,10 @@ Obrigatoriedade de 8 ou 9 dígitos numéricos. Não permitir digitara letras.
 
 E-mail: obrigatório o campo de e-mail ser no formato xxxx@xxx.xxx. Ou seja, tem que ter @ e depois do arroba, um . (ponto) alguma coisa.
 
-Campo obrigatórios: nome, sobrenome, email, mobile phone, birthday e language. 
+Campo obrigatórios: nome, sobrenome, email, mobile phone, birthday e language.
+
+Em meu projeto eu adicionei o campo de senha, para que o login da tela inicial possa ser feito utilizando o login e senha criados na tela 3.
+
+Adicionei também eventos e keyup e keydown para mascarar o campo passport dessa tela, apenas para praticar o uso desses eventos.
 
 A tela de formulário deve ser chamada a partir do clicar no botão "Add new user" do item anterior
-
-
