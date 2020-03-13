@@ -62,7 +62,7 @@ REGRAS DA TELA:
 
 
 
-## Passos que realizei para criar o projeto
+## Passos que realizei para criar o projeto (back-end e front-end)
 
 * Iniciar fazendo apenas a parte visual das telas utilizando HTML e CSS. 
 
